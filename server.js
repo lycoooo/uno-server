@@ -12,6 +12,73 @@ let authTokens = {
     'uid': ''
 };
 
+// Helper function to generate random values for browser headers
+function generateRandomHeaders(isLogin = false) {
+    // Random Chrome version (137-149)
+    const chromeVersion = Math.floor(Math.random() * 13) + 137;
+    // Random device ID (16-19 digits)
+    const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
+    // Random platform code (20 char hex)
+    const platformCode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
+    // Random cur-code (22 char)
+    const curCode = Array.from({ length: 22 }, () => Math.random().toString(36).charAt(Math.floor(Math.random() * 36))).join('');
+
+    return {
+        'Accept': 'application/json, text/plain, */*',
+        'API': 'v',
+        'platform': '',
+        'client-version': '1.0',
+        'content-type': 'application/json',
+        'cur-code': curCode,
+        'device-channel': 'WEB',
+        'device-id': deviceId.toString(),
+        'device-type': 'H5',
+        'platform-code': platformCode,
+        'referer': 'https://www.fbmplay.com/login',
+        'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'system-lang': 'en-US',
+        'user-agent': `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVersion}.0.0.0 Safari/537.36`
+    };
+}
+
+function generateRandomHeadersAndroid() {
+    // Random Chrome version (137-149)
+    const chromeVersion = Math.floor(Math.random() * 13) + 137;
+    // Random device ID (16-19 digits)
+    const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
+    // Random platform code (20 char hex)
+    const platformCode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
+    // Random cur-code (22 char)
+    const curCode = Array.from({ length: 22 }, () => Math.random().toString(36).charAt(Math.floor(Math.random() * 36))).join('');
+
+    // Random Android device
+    const androidDevices = ['Pixel 9', 'Pixel 8', 'Pixel 7', 'Samsung Galaxy S24', 'OnePlus 12'];
+    const androidDevice = androidDevices[Math.floor(Math.random() * androidDevices.length)];
+
+    return {
+        'Accept': 'application/json, text/plain, */*',
+        'api': 'platform',
+        'cachekey-app1': authTokens['cachekey-app1'],
+        'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
+        'client-version': '1.0',
+        'content-type': 'application/json',
+        'cur-code': curCode,
+        'device-channel': 'Android H5',
+        'device-id': deviceId.toString(),
+        'device-type': 'H5',
+        'platform-code': platformCode,
+        'referer': 'https://www.fbmplay.com/Password/',
+        'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
+        'sec-ch-ua-mobile': '?1',
+        'sec-ch-ua-platform': '"Android"',
+        'system-lang': 'en-US',
+        'uid': authTokens['uid'],
+        'user-agent': `Mozilla/5.0 (Linux; Android 15; ${androidDevice}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVersion}.0.0.0 Mobile Safari/537.36`
+    };
+}
+
 // CORS configuration - allow all origins
 app.use(cors({
     origin: '*',
@@ -33,24 +100,7 @@ app.post('/api/send-code', async (req, res) => {
         countryDataPkCode: "104gWJiOamfNjEt3xG92501"
     };
 
-    const headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'API': 'v',
-        'platform': '',
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'WEB',
-        'device-id': '1781431269436936793',
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/login',
-        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'system-lang': 'en-US',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36'
-    };
+    const headers = generateRandomHeaders();
 
     try {
         console.log('Sending request to API...');
@@ -86,24 +136,7 @@ app.post('/api/login', async (req, res) => {
         mobileVerifyCode: mobileVerifyCode
     };
 
-    const headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'API': 'v',
-        'platform': '',
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'WEB',
-        'device-id': '1781431269436936793',
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/login',
-        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'system-lang': 'en-US',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36'
-    };
+    const headers = generateRandomHeaders(true);
 
     try {
         console.log('Sending login request...');
@@ -140,24 +173,12 @@ app.post('/api/get-assets', async (req, res) => {
     const payload = {};
 
     const headers = {
-        'Accept': 'application/json, text/plain, */*',
+        ...generateRandomHeaders(),
         'api': 'platform',
         'cachekey-app1': authTokens['cachekey-app1'],
         'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'WEB',
-        'device-id': '1781431269436936793',
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
         'referer': 'https://www.fbmplay.com/?app=1',
-        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'system-lang': 'en-US',
-        'uid': authTokens['uid'],
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36'
+        'uid': authTokens['uid']
     };
 
     try {
@@ -183,26 +204,7 @@ app.post('/api/get-assets', async (req, res) => {
 });
 
 app.post('/api/send-reset-code', async (req, res) => {
-    const headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'api': 'platform',
-        'cachekey-app1': authTokens['cachekey-app1'],
-        'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'Android H5',
-        'device-id': '1781431269436936793',
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/Password/',
-        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-platform': '"Android"',
-        'system-lang': 'en-US',
-        'uid': authTokens['uid'],
-        'user-agent': 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36'
-    };
+    const headers = generateRandomHeadersAndroid();
 
     try {
         console.log('Sending password reset code...');
@@ -233,26 +235,7 @@ app.post('/api/reset-password', async (req, res) => {
         password: password
     };
 
-    const headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'api': 'platform',
-        'cachekey-app1': authTokens['cachekey-app1'],
-        'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'Android H5',
-        'device-id': '1781431269436936793',
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/Password/',
-        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-platform': '"Android"',
-        'system-lang': 'en-US',
-        'uid': authTokens['uid'],
-        'user-agent': 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36'
-    };
+    const headers = generateRandomHeadersAndroid();
 
     try {
         console.log('Resetting password...');
