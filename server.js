@@ -18,10 +18,6 @@ function generateRandomHeaders(isLogin = false) {
     const chromeVersion = Math.floor(Math.random() * 13) + 137;
     // Random device ID (16-19 digits)
     const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
-    // Random platform code (20 char hex)
-    const platformCode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
-    // Random cur-code (22 char)
-    const curCode = Array.from({ length: 22 }, () => Math.random().toString(36).charAt(Math.floor(Math.random() * 36))).join('');
 
     return {
         'Accept': 'application/json, text/plain, */*',
@@ -29,11 +25,11 @@ function generateRandomHeaders(isLogin = false) {
         'platform': '',
         'client-version': '1.0',
         'content-type': 'application/json',
-        'cur-code': curCode,
+        'cur-code': '701VHcfdkh76FwQmHFh4239',
         'device-channel': 'WEB',
         'device-id': deviceId.toString(),
         'device-type': 'H5',
-        'platform-code': platformCode,
+        'platform-code': '1019A5DD0B94185AF2C',
         'referer': 'https://www.fbmplay.com/login',
         'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
         'sec-ch-ua-mobile': '?0',
@@ -48,10 +44,6 @@ function generateRandomHeadersAndroid() {
     const chromeVersion = Math.floor(Math.random() * 13) + 137;
     // Random device ID (16-19 digits)
     const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
-    // Random platform code (20 char hex)
-    const platformCode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
-    // Random cur-code (22 char)
-    const curCode = Array.from({ length: 22 }, () => Math.random().toString(36).charAt(Math.floor(Math.random() * 36))).join('');
 
     // Random Android device
     const androidDevices = ['Pixel 9', 'Pixel 8', 'Pixel 7', 'Samsung Galaxy S24', 'OnePlus 12'];
@@ -64,11 +56,11 @@ function generateRandomHeadersAndroid() {
         'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
         'client-version': '1.0',
         'content-type': 'application/json',
-        'cur-code': curCode,
+        'cur-code': '701VHcfdkh76FwQmHFh4239',
         'device-channel': 'Android H5',
         'device-id': deviceId.toString(),
         'device-type': 'H5',
-        'platform-code': platformCode,
+        'platform-code': '1019A5DD0B94185AF2C',
         'referer': 'https://www.fbmplay.com/Password/',
         'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
         'sec-ch-ua-mobile': '?1',
