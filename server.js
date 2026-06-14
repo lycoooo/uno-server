@@ -3,7 +3,7 @@ const cors = require('cors');
 // Node.js 18+ has built-in fetch
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Store authentication tokens
 let authTokens = {
@@ -12,7 +12,16 @@ let authTokens = {
     'uid': ''
 };
 
-app.use(cors());
+// CORS configuration - allow all origins
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept', 'API', 'platform', 'client-version', 'cur-code', 'device-channel', 'device-id', 'device-type', 'platform-code', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'system-lang', 'user-agent']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(express.json());
 
 app.post('/api/send-code', async (req, res) => {
