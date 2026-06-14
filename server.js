@@ -12,48 +12,14 @@ let authTokens = {
     'uid': ''
 };
 
-// Helper function to generate random values for browser headers
-function generateRandomHeaders(isLogin = false) {
-    // Random Chrome version (137-149)
-    const chromeVersion = Math.floor(Math.random() * 13) + 137;
-    // Random device ID (16-19 digits)
+// ============================================
+// HEADER 1 - For Login API (send-code, login) - Android
+// ============================================
+function getHeaders1() {
     const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
-
-    return {
-        'Accept': 'application/json, text/plain, */*',
-        'API': 'v',
-        'platform': '',
-        'client-version': '1.0',
-        'content-type': 'application/json',
-        'cur-code': '701VHcfdkh76FwQmHFh4239',
-        'device-channel': 'WEB',
-        'device-id': deviceId.toString(),
-        'device-type': 'H5',
-        'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/login',
-        'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'system-lang': 'en-US',
-        'user-agent': `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVersion}.0.0.0 Safari/537.36`
-    };
-}
-
-function generateRandomHeadersAndroid() {
-    // Random Chrome version (137-149)
-    const chromeVersion = Math.floor(Math.random() * 13) + 137;
-    // Random device ID (16-19 digits)
-    const deviceId = Math.floor(Math.random() * 9000000000000000000) + 1000000000000000000;
-
-    // Random Android device
-    const androidDevices = ['Pixel 9', 'Pixel 8', 'Pixel 7', 'Samsung Galaxy S24', 'OnePlus 12'];
-    const androidDevice = androidDevices[Math.floor(Math.random() * androidDevices.length)];
-
     return {
         'Accept': 'application/json, text/plain, */*',
         'api': 'platform',
-        'cachekey-app1': authTokens['cachekey-app1'],
-        'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
         'client-version': '1.0',
         'content-type': 'application/json',
         'cur-code': '701VHcfdkh76FwQmHFh4239',
@@ -61,15 +27,62 @@ function generateRandomHeadersAndroid() {
         'device-id': deviceId.toString(),
         'device-type': 'H5',
         'platform-code': '1019A5DD0B94185AF2C',
-        'referer': 'https://www.fbmplay.com/Password/',
-        'sec-ch-ua': `"Chrome";v="${chromeVersion}", "Chromium";v="${chromeVersion}", "Not)A;Brand";v="24"`,
+        'referer': 'https://www.fbmplay.com/login',
+        'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
         'sec-ch-ua-mobile': '?1',
         'sec-ch-ua-platform': '"Android"',
         'system-lang': 'en-US',
-        'uid': authTokens['uid'],
-        'user-agent': `Mozilla/5.0 (Linux; Android 15; ${androidDevice}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVersion}.0.0.0 Mobile Safari/537.36`
+        'user-agent': 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36'
     };
 }
+
+// ============================================
+// HEADER 2 - For Get Assets API
+// ============================================
+const headers2 = {
+    'Accept': 'application/json, text/plain, */*',
+    'api': 'platform',
+    'cachekey-app1': authTokens['cachekey-app1'],
+    'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
+    'client-version': '1.0',
+    'content-type': 'application/json',
+    'cur-code': '701VHcfdkh76FwQmHFh4239',
+    'device-channel': 'WEB',
+    'device-id': '1781431269436936793',
+    'device-type': 'H5',
+    'platform-code': '1019A5DD0B94185AF2C',
+    'referer': 'https://www.fbmplay.com/?app=1',
+    'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'system-lang': 'en-US',
+    'uid': authTokens['uid'],
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36'
+};
+
+// ============================================
+// HEADER 3 - For OTP/Reset API (send-reset-code, reset-password)
+// ============================================
+const headers3 = {
+    'Accept': 'application/json, text/plain, */*',
+    'api': 'platform',
+    'cachekey-app1': authTokens['cachekey-app1'],
+    'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
+    'client-version': '1.0',
+    'content-type': 'application/json',
+    'cur-code': '701VHcfdkh76FwQmHFh4239',
+    'device-channel': 'Android H5',
+    'device-id': '1781431269436936793',
+    'device-type': 'H5',
+    'platform-code': '1019A5DD0B94185AF2C',
+    'referer': 'https://www.fbmplay.com/Password/',
+    'sec-ch-ua': '"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-platform': '"Android"',
+    'system-lang': 'en-US',
+    'uid': authTokens['uid'],
+    'user-agent': 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36'
+};
 
 // CORS configuration - allow all origins
 app.use(cors({
@@ -92,7 +105,7 @@ app.post('/api/send-code', async (req, res) => {
         countryDataPkCode: "104gWJiOamfNjEt3xG92501"
     };
 
-    const headers = generateRandomHeaders();
+    const headers = getHeaders1();
 
     try {
         console.log('Sending request to API...');
@@ -128,7 +141,7 @@ app.post('/api/login', async (req, res) => {
         mobileVerifyCode: mobileVerifyCode
     };
 
-    const headers = generateRandomHeaders(true);
+    const headers = getHeaders1();
 
     try {
         console.log('Sending login request...');
@@ -164,14 +177,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/get-assets', async (req, res) => {
     const payload = {};
 
-    const headers = {
-        ...generateRandomHeaders(),
-        'api': 'platform',
-        'cachekey-app1': authTokens['cachekey-app1'],
-        'chyjrtgn-app1': authTokens['chyjrtgn-app1'],
-        'referer': 'https://www.fbmplay.com/?app=1',
-        'uid': authTokens['uid']
-    };
+    const headers = headers2;
 
     try {
         console.log('Sending get-assets request...');
@@ -196,7 +202,7 @@ app.post('/api/get-assets', async (req, res) => {
 });
 
 app.post('/api/send-reset-code', async (req, res) => {
-    const headers = generateRandomHeadersAndroid();
+    const headers = headers3;
 
     try {
         console.log('Sending password reset code...');
@@ -227,7 +233,7 @@ app.post('/api/reset-password', async (req, res) => {
         password: password
     };
 
-    const headers = generateRandomHeadersAndroid();
+    const headers = headers3;
 
     try {
         console.log('Resetting password...');
